@@ -5,7 +5,7 @@
 
 import json
 
-with open('trello-export-p6zU8Myv.json') as thefile:
+with open('XPfA74Iz.json') as thefile:
     t = thefile.read()
     j = json.loads(t)
     lists = {}
@@ -26,4 +26,9 @@ with open('trello-export-p6zU8Myv.json') as thefile:
         print()
         for c in json_cards:
             if c['idList'] == l:
-                print(c['name'])
+                name_raw = c['name']
+                # We want to keep the text on one line, not using the carriage return characters that Trello produces.
+                # Otherwise long card names with line breaks will be broken after sorting the text file.
+                # It might still be useful to be able to see where the line break was, so let's replace it.
+                name_mod = name_raw.replace('\r', '_r_')
+                print(name_mod)
